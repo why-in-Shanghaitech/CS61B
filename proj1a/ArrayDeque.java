@@ -18,6 +18,10 @@ public class ArrayDeque<T> {
     }
 
     private void resize(int capacity) {
+        if (size > capacity) {
+            System.out.println("size (" + size + ") larger than capacity (" + capacity + ")!");
+        }
+
         T[] a = (T[]) new Object[capacity];
         for (int i = 0; i < size; i++) {
             a[i] = get(i);
@@ -29,7 +33,7 @@ public class ArrayDeque<T> {
 
     public void addFirst(T item) {
         if (size == items.length) {
-            resize(size * RFACTOR);
+            resize(items.length * RFACTOR);
         }
 
         items[nextFirst] = item;
@@ -39,7 +43,7 @@ public class ArrayDeque<T> {
 
     public void addLast(T item) {
         if (size == items.length) {
-            resize(size * RFACTOR);
+            resize(items.length * RFACTOR);
         }
 
         items[nextLast] = item;
@@ -64,8 +68,12 @@ public class ArrayDeque<T> {
     }
 
     public T removeFirst() {
+        if (size == 0) {
+            return null;
+        }
+
         if (size >= 16 && size < items.length / 4) {
-            resize(size / RFACTOR);
+            resize(items.length / RFACTOR);
         }
 
         T result = items[plusOne(nextFirst)];
@@ -76,8 +84,12 @@ public class ArrayDeque<T> {
     }
 
     public T removeLast() {
+        if (size == 0) {
+            return null;
+        }
+
         if (size >= 16 && size < items.length / 4) {
-            resize(size / RFACTOR);
+            resize(items.length / RFACTOR);
         }
 
         T result = items[minusOne(nextLast)];
@@ -90,17 +102,17 @@ public class ArrayDeque<T> {
     public T get(int index) {
         return items[(nextFirst + index + 1) % items.length];
     }
-    
+
     private int minusOne(int index) {
         if (index - 1 >= 0) {
             return index - 1;
         } else {
-            return size - 1;
+            return items.length - 1;
         }
     }
 
     private int plusOne(int index) {
-        if (index + 1 < size) {
+        if (index + 1 < items.length) {
             return index + 1;
         } else {
             return 0;
