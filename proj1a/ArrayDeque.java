@@ -72,7 +72,7 @@ public class ArrayDeque<T> {
             return null;
         }
 
-        if (size >= 16 && size < items.length / 4) {
+        if (items.length >= 16 && size < items.length / 4) {
             resize(items.length / RFACTOR);
         }
 
@@ -88,7 +88,7 @@ public class ArrayDeque<T> {
             return null;
         }
 
-        if (size >= 16 && size < items.length / 4) {
+        if (items.length >= 16 && size < items.length / 4) {
             resize(items.length / RFACTOR);
         }
 
