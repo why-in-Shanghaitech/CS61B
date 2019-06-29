@@ -32,6 +32,16 @@ public class TestArrayRingBuffer {
         assertEquals(5, tar);
     }
 
+    @Test
+    public void testNestedIterator() {
+        int[] someInts = new int[]{1, 2, 3};
+        for (int x : someInts) {
+            for (int y: someInts) {
+                System.out.println("x: " + x +  ", y:" + y);
+            }
+        }
+    }
+
     /** Calls tests for ArrayRingBuffer. */
     public static void main(String[] args) {
         jh61b.junit.textui.runClasses(TestArrayRingBuffer.class);
