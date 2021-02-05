@@ -170,7 +170,9 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
         T min = peek();
         swap(1, size);
         size--;
-        sink(1);
+        if (size > 0) {
+            sink(1);
+        }
         contents[size + 1] = null;
         if ((size > 31) && (size == (contents.length - 1) / 4)) {
             resize(contents.length / 2);
